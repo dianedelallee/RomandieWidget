@@ -199,14 +199,20 @@ struct ListView: View {
                 let fit = max(1, Int((geo.size.height - headerH) / rowH))
                 let count = min(pageSize, fit, entry.concerts.count)
 
-                let start = min(entry.offset, max(0, entry.concerts.count - 1))
-                let end = min(start + count, entry.concerts.count)
+                let total = entry.concerts.count
+                let start = min(entry.offset, max(0, total - 1))
+                let end = min(start + count, total)
                 let visible = Array(entry.concerts[start..<end])
+
+                // 1 par page -> "8 sur 13" ; plusieurs par page -> "2/3" (page / total pages)
+                let pageCount = max(1, (total + count - 1) / count)
+                let currentPage = min(pageCount, start / count + 1)
+                let pageLabel = count <= 1 ? "\(start + 1) sur \(total)" : "\(currentPage)/\(pageCount)"
 
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(spacing: 6) {
                         Circle().fill(Color.romandieRed).frame(width: 7, height: 7)
-                        Text("\(start + 1)–\(end)/\(entry.concerts.count)")
+                        Text(pageLabel)
                             .font(.caption2)
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
