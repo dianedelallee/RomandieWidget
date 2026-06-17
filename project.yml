@@ -13,10 +13,6 @@ settings:
     CODE_SIGN_STYLE: Automatic
     # Renseigne ton Team ID Apple ici (ou choisis-le dans Xcode > Signing).
     DEVELOPMENT_TEAM: ""
-    # >>> CHANGE UNIQUEMENT CETTE LIGNE pour ton identifiant unique. <<<
-    # L'extension widget devient automatiquement APP_BUNDLE_ID + ".widget",
-    # donc les deux restent toujours préfixés correctement.
-    APP_BUNDLE_ID: ch.diane.romandie
 
 targets:
   # --- Application hôte (minimale, mais affiche aussi la liste des concerts) ---
@@ -28,7 +24,9 @@ targets:
       - Shared
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: $(APP_BUNDLE_ID)
+        # ⚠️ L'extension DOIT être ce même id + ".widget" (voir plus bas). Ne change
+        #    pas le bundle id dans l'UI Xcode : modifie-le ici puis `xcodegen generate`.
+        PRODUCT_BUNDLE_IDENTIFIER: ch.diane.romandie
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: Romandie
@@ -49,7 +47,8 @@ targets:
       - Shared
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: $(APP_BUNDLE_ID).widget
+        # = bundle id de l'app + ".widget" (préfixe obligatoire pour une extension).
+        PRODUCT_BUNDLE_IDENTIFIER: ch.diane.romandie.widget
         GENERATE_INFOPLIST_FILE: NO
         INFOPLIST_FILE: Widget/Info.plist
         TARGETED_DEVICE_FAMILY: "1,2"
