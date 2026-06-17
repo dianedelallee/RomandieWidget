@@ -1,0 +1,449 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A3DDD65D0CC105F85CEA638 /* RomandieWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E28608C991F209402DA416D4 /* RomandieWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		39BFF9B585D415680B5F701F /* ConcertLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC385F81D6C3FE75AB3FB60 /* ConcertLoader.swift */; };
+		4E16936918780DF93507FBC4 /* RomandieWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25264F6F489D395ECC5E169D /* RomandieWidget.swift */; };
+		58451BCB85090FCADCFAE1CE /* Concert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F432343463CA7907F701A0D /* Concert.swift */; };
+		5CFE905760626B87814FAC28 /* RomandieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A603B15F7E01678B93A7D3EA /* RomandieApp.swift */; };
+		60AF559AADBEC0E20451221D /* Concert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F432343463CA7907F701A0D /* Concert.swift */; };
+		7E25BA40BE0A97E3A9D5E112 /* ConcertLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC385F81D6C3FE75AB3FB60 /* ConcertLoader.swift */; };
+		9666456F75B886D9BB5E8742 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C4AB3F63B503CC51E4D59 /* Theme.swift */; };
+		9CDD1651C14BCCC86B055DD9 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C4AB3F63B503CC51E4D59 /* Theme.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8830D6CC13B95EF873756BE1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7A6B9EFC9D724760DF62D33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21386F76EF35077E9D3F5286;
+			remoteInfo = RomandieWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		61789215D1E3F9BA893EE342 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2A3DDD65D0CC105F85CEA638 /* RomandieWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0F432343463CA7907F701A0D /* Concert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concert.swift; sourceTree = "<group>"; };
+		25264F6F489D395ECC5E169D /* RomandieWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomandieWidget.swift; sourceTree = "<group>"; };
+		3EE8EC0EC9CA12683D842F9A /* RomandieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RomandieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D8C4AB3F63B503CC51E4D59 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		A603B15F7E01678B93A7D3EA /* RomandieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomandieApp.swift; sourceTree = "<group>"; };
+		ABF1EFD3ECA042791A757A08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DAC385F81D6C3FE75AB3FB60 /* ConcertLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertLoader.swift; sourceTree = "<group>"; };
+		E28608C991F209402DA416D4 /* RomandieWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RomandieWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		5752C489CA7CE89527A3C772 /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				ABF1EFD3ECA042791A757A08 /* Info.plist */,
+				25264F6F489D395ECC5E169D /* RomandieWidget.swift */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
+		81C61C817314FAE8887F0E3D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EE8EC0EC9CA12683D842F9A /* RomandieApp.app */,
+				E28608C991F209402DA416D4 /* RomandieWidgetExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BBE290BC13B26FE980CF32F2 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				0F432343463CA7907F701A0D /* Concert.swift */,
+				DAC385F81D6C3FE75AB3FB60 /* ConcertLoader.swift */,
+				6D8C4AB3F63B503CC51E4D59 /* Theme.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		CAE82E237E0E1C5A477E951A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A603B15F7E01678B93A7D3EA /* RomandieApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D98741FF1369A5D9F6235AB5 = {
+			isa = PBXGroup;
+			children = (
+				CAE82E237E0E1C5A477E951A /* App */,
+				BBE290BC13B26FE980CF32F2 /* Shared */,
+				5752C489CA7CE89527A3C772 /* Widget */,
+				81C61C817314FAE8887F0E3D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		21386F76EF35077E9D3F5286 /* RomandieWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 555E532080B320421CB71724 /* Build configuration list for PBXNativeTarget "RomandieWidgetExtension" */;
+			buildPhases = (
+				69020052A6DCD100D06BD40C /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RomandieWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = RomandieWidgetExtension;
+			productReference = E28608C991F209402DA416D4 /* RomandieWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		F98AA15D2F8EA2EA9E3A79C0 /* RomandieApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0987BD472814693877F0A1F7 /* Build configuration list for PBXNativeTarget "RomandieApp" */;
+			buildPhases = (
+				C8F66A1E267DF96F5FA45BBD /* Sources */,
+				61789215D1E3F9BA893EE342 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4FF88CABFE257452E3F96A65 /* PBXTargetDependency */,
+			);
+			name = RomandieApp;
+			packageProductDependencies = (
+			);
+			productName = RomandieApp;
+			productReference = 3EE8EC0EC9CA12683D842F9A /* RomandieApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D7A6B9EFC9D724760DF62D33 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					21386F76EF35077E9D3F5286 = {
+						ProvisioningStyle = Automatic;
+					};
+					F98AA15D2F8EA2EA9E3A79C0 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 1CE19FF820E1F5CCEA1BF746 /* Build configuration list for PBXProject "RomandieWidget" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = D98741FF1369A5D9F6235AB5;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 81C61C817314FAE8887F0E3D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F98AA15D2F8EA2EA9E3A79C0 /* RomandieApp */,
+				21386F76EF35077E9D3F5286 /* RomandieWidgetExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		69020052A6DCD100D06BD40C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58451BCB85090FCADCFAE1CE /* Concert.swift in Sources */,
+				39BFF9B585D415680B5F701F /* ConcertLoader.swift in Sources */,
+				4E16936918780DF93507FBC4 /* RomandieWidget.swift in Sources */,
+				9666456F75B886D9BB5E8742 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8F66A1E267DF96F5FA45BBD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60AF559AADBEC0E20451221D /* Concert.swift in Sources */,
+				7E25BA40BE0A97E3A9D5E112 /* ConcertLoader.swift in Sources */,
+				5CFE905760626B87814FAC28 /* RomandieApp.swift in Sources */,
+				9CDD1651C14BCCC86B055DD9 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4FF88CABFE257452E3F96A65 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21386F76EF35077E9D3F5286 /* RomandieWidgetExtension */;
+			targetProxy = 8830D6CC13B95EF873756BE1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1F85A853858DE18D05C8E0D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 6YUTPFX8RX;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.leromandie.widget.widget;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7FAA6017DD7639D1CB781072 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 6YUTPFX8RX;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.leromandie.widget.widget;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		957F15E527E52E1913278274 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6YUTPFX8RX;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Romandie;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.leromandie.widget;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B32C4A2EE0EA55C7595D6FC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C7354301DC8DC4646E2D6597 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E36CBFE4F28594FA54F8A468 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6YUTPFX8RX;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Romandie;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.leromandie.widget;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0987BD472814693877F0A1F7 /* Build configuration list for PBXNativeTarget "RomandieApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E36CBFE4F28594FA54F8A468 /* Debug */,
+				957F15E527E52E1913278274 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1CE19FF820E1F5CCEA1BF746 /* Build configuration list for PBXProject "RomandieWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B32C4A2EE0EA55C7595D6FC8 /* Debug */,
+				C7354301DC8DC4646E2D6597 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		555E532080B320421CB71724 /* Build configuration list for PBXNativeTarget "RomandieWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FAA6017DD7639D1CB781072 /* Debug */,
+				1F85A853858DE18D05C8E0D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D7A6B9EFC9D724760DF62D33 /* Project object */;
+}
