@@ -1,11 +1,13 @@
 import WidgetKit
 import SwiftUI
+import AppIntents
 
 // MARK: - Timeline
 
 struct ConcertEntry: TimelineEntry {
     let date: Date
-    let concerts: [Concert]
+    let concerts: [Concert]      // liste complète (paginée à l'affichage)
+    let offset: Int              // index du premier concert affiché
     let images: [String: Data]   // concert.id -> données de l'affiche
     let errorMessage: String?
 
@@ -17,12 +19,12 @@ struct ConcertEntry: TimelineEntry {
 struct Provider: TimelineProvider {
 
     func placeholder(in context: Context) -> ConcertEntry {
-        ConcertEntry(date: Date(), concerts: ConcertLoader.sample, images: [:], errorMessage: nil)
+        ConcertEntry(date: Date(), concerts: ConcertLoader.sample, offset: 0, images: [:], errorMessage: nil)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (ConcertEntry) -> Void) {
         if context.isPreview {
-            completion(ConcertEntry(date: Date(), concerts: ConcertLoader.sample, images: [:], errorMessage: nil))
+            completion(ConcertEntry(date: Date(), concerts: ConcertLoader.sample, offset: 0, images: [:], errorMessage: nil))
             return
         }
         Task { completion(await loadEntry()) }
@@ -31,32 +33,45 @@ struct Provider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<ConcertEntry>) -> Void) {
         Task {
             let entry = await loadEntry()
-            // Rafraîchit ~toutes les 6 heures.
+            // Rafraîchit ~toutes les 6 heures (les boutons rechargent à part).
             let next = Calendar.current.date(byAdding: .hour, value: 6, to: Date()) ?? Date().addingTimeInterval(6 * 3600)
             completion(Timeline(entries: [entry], policy: .after(next)))
         }
     }
 
     private func loadEntry() async -> ConcertEntry {
-        do {
-            let concerts = try await ConcertLoader.fetch()
-            // Télécharge les affiches des concerts affichés (au max les 7 du grand widget).
-            let toShow = Array(concerts.prefix(7))
-            var images: [String: Data] = [:]
-            await withTaskGroup(of: (String, Data?).self) { group in
-                for c in toShow {
-                    guard let url = c.imageURL else { continue }
-                    group.addTask { (c.id, await ConcertLoader.fetchImageData(url)) }
+        // 1) Utilise le cache si récent (<2 h) — les taps sur ◀▶ sont alors instantanés.
+        var concerts = ConcertCache.loadConcerts()
+        let stale = ConcertCache.cacheDate.map { Date().timeIntervalSince($0) > 2 * 3600 } ?? true
+
+        if concerts.isEmpty || stale {
+            if let fresh = try? await ConcertLoader.fetch(), !fresh.isEmpty {
+                concerts = fresh
+                ConcertCache.saveConcerts(fresh)
+                // Télécharge et met en cache toutes les affiches (en parallèle).
+                await withTaskGroup(of: Void.self) { group in
+                    for c in fresh {
+                        guard let url = c.imageURL else { continue }
+                        group.addTask {
+                            if let data = await ConcertLoader.fetchImageData(url) {
+                                ConcertCache.saveImage(data, for: c)
+                            }
+                        }
+                    }
                 }
-                for await (id, data) in group {
-                    if let data { images[id] = data }
-                }
+                ConcertCache.pageOffset = 0   // nouvelle programmation -> on repart du début
             }
-            return ConcertEntry(date: Date(), concerts: concerts, images: images, errorMessage: nil)
-        } catch {
-            return ConcertEntry(date: Date(), concerts: [], images: [:],
-                                errorMessage: "Impossible de charger la programmation.")
         }
+
+        // 2) Charge les affiches en cache.
+        var images: [String: Data] = [:]
+        for c in concerts {
+            if let d = ConcertCache.imageData(for: c) { images[c.id] = d }
+        }
+
+        let offset = min(max(0, ConcertCache.pageOffset), max(0, concerts.count - 1))
+        let err = concerts.isEmpty ? "Impossible de charger la programmation." : nil
+        return ConcertEntry(date: Date(), concerts: concerts, offset: offset, images: images, errorMessage: err)
     }
 }
 
@@ -70,56 +85,105 @@ struct RomandieWidgetView: View {
         Group {
             switch family {
             case .systemSmall: SmallView(entry: entry)
-            case .systemLarge: ListView(entry: entry, maxRows: 7, title: true)
-            default:           ListView(entry: entry, maxRows: 3, title: true) // medium
+            case .systemLarge: ListView(entry: entry, pageSize: 6)
+            default:           ListView(entry: entry, pageSize: 3) // medium
             }
         }
         .containerBackground(for: .widget) { Color(.systemBackground) }
     }
 }
 
-// MARK: - Petit widget : prochain concert
+// MARK: - Boutons de pagination ◀ ▶
+
+struct PagerButtons: View {
+    let offset: Int
+    let pageSize: Int
+    let total: Int
+
+    private var canPrev: Bool { offset > 0 }
+    private var canNext: Bool { offset + pageSize < total }
+
+    var body: some View {
+        HStack(spacing: 6) {
+            Button(intent: ShiftConcertsIntent(direction: -1, pageSize: pageSize)) {
+                Image(systemName: "chevron.left").font(.caption2.bold())
+            }
+            .disabled(!canPrev)
+            Button(intent: ShiftConcertsIntent(direction: 1, pageSize: pageSize)) {
+                Image(systemName: "chevron.right").font(.caption2.bold())
+            }
+            .disabled(!canNext)
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(Color.romandieRed)
+    }
+}
+
+// MARK: - Petit widget : un concert + flèches
 
 struct SmallView: View {
     let entry: ConcertEntry
 
+    private var concert: Concert? {
+        guard !entry.concerts.isEmpty else { return nil }
+        return entry.concerts[min(entry.offset, entry.concerts.count - 1)]
+    }
+
     var body: some View {
-        if let c = entry.concerts.first {
+        if let c = concert {
             ZStack(alignment: .bottomLeading) {
                 if let ui = entry.image(for: c) {
-                    Image(uiImage: ui)
-                        .resizable()
-                        .scaledToFill()
+                    Image(uiImage: ui).resizable().scaledToFill()
                     LinearGradient(colors: [.black.opacity(0.05), .black.opacity(0.85)],
                                    startPoint: .top, endPoint: .bottom)
                 } else {
                     Color.romandieRed
                 }
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(c.shortDateLabel.uppercased())
-                        .font(.caption2).bold()
-                        .foregroundStyle(.white.opacity(0.9))
+                    HStack {
+                        Text(c.shortDateLabel.uppercased())
+                            .font(.caption2).bold()
+                            .foregroundStyle(.white.opacity(0.9))
+                        Spacer()
+                        Text("\(entry.offset + 1)/\(entry.concerts.count)")
+                            .font(.caption2).bold()
+                            .foregroundStyle(.white.opacity(0.8))
+                    }
                     Text(c.title)
                         .font(.caption).bold()
                         .foregroundStyle(.white)
-                        .lineLimit(3)
+                        .lineLimit(2)
                         .minimumScaleFactor(0.8)
+                    HStack {
+                        Link(destination: c.url) {
+                            Text("Infos").font(.caption2.bold())
+                                .foregroundStyle(.white)
+                        }
+                        Spacer()
+                        PagerButtons(offset: entry.offset, pageSize: 1, total: entry.concerts.count)
+                            .foregroundStyle(.white)
+                    }
                 }
                 .padding(10)
             }
-            .widgetURL(c.url)
         } else {
             EmptyStateView(message: entry.errorMessage)
         }
     }
 }
 
-// MARK: - Widget moyen / grand : liste
+// MARK: - Widget moyen / grand : liste paginée
 
 struct ListView: View {
     let entry: ConcertEntry
-    let maxRows: Int
-    let title: Bool
+    let pageSize: Int
+
+    private var visible: [Concert] {
+        guard !entry.concerts.isEmpty else { return [] }
+        let start = min(entry.offset, max(0, entry.concerts.count - 1))
+        let end = min(start + pageSize, entry.concerts.count)
+        return Array(entry.concerts[start..<end])
+    }
 
     var body: some View {
         if entry.concerts.isEmpty {
@@ -132,17 +196,20 @@ struct ListView: View {
                         .font(.caption2).bold()
                         .foregroundStyle(.secondary)
                     Spacer()
+                    Text("\(entry.offset + 1)–\(min(entry.offset + pageSize, entry.concerts.count)) / \(entry.concerts.count)")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                    PagerButtons(offset: entry.offset, pageSize: pageSize, total: entry.concerts.count)
                 }
-                ForEach(entry.concerts.prefix(maxRows)) { c in
-                    ConcertRow(concert: c, poster: entry.image(for: c))
-                    if c.id != entry.concerts.prefix(maxRows).last?.id {
-                        Divider()
+                ForEach(visible) { c in
+                    Link(destination: c.url) {
+                        ConcertRow(concert: c, poster: entry.image(for: c))
                     }
+                    if c.id != visible.last?.id { Divider() }
                 }
                 Spacer(minLength: 0)
             }
             .padding(12)
-            .widgetURL(URL(string: "https://www.leromandie.ch/programmation"))
         }
     }
 }
@@ -153,12 +220,9 @@ struct ConcertRow: View {
 
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
-            // Affiche (ou pastille date en repli)
             Group {
                 if let poster {
-                    Image(uiImage: poster)
-                        .resizable()
-                        .scaledToFill()
+                    Image(uiImage: poster).resizable().scaledToFill()
                 } else {
                     ZStack {
                         Color.romandieRed
@@ -177,6 +241,7 @@ struct ConcertRow: View {
                 Text(concert.title)
                     .font(.caption).bold()
                     .lineLimit(2)
+                    .foregroundStyle(.primary)
                 Text(subtitle)
                     .font(.caption2)
                     .foregroundStyle(.secondary)
@@ -245,5 +310,5 @@ struct RomandieWidgetBundle: WidgetBundle {
 #Preview("Medium", as: .systemMedium) {
     RomandieWidget()
 } timeline: {
-    ConcertEntry(date: .now, concerts: ConcertLoader.sample, images: [:], errorMessage: nil)
+    ConcertEntry(date: .now, concerts: ConcertLoader.sample, offset: 0, images: [:], errorMessage: nil)
 }

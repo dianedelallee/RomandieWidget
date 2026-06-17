@@ -1,7 +1,7 @@
 import Foundation
 
 /// Un concert / événement au Romandie.
-struct Concert: Identifiable, Hashable {
+struct Concert: Identifiable, Hashable, Codable {
     let id: String          // URL de l'événement (unique)
     let title: String       // Nom de l'événement
     let dateText: String    // Date brute affichée, ex. "21 juin 2026"

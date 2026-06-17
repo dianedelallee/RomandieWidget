@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28B92A41C6C4109802D904E6 /* ShiftConcertsIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E31110087B34E66C404B4F /* ShiftConcertsIntent.swift */; };
 		2A3DDD65D0CC105F85CEA638 /* RomandieWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E28608C991F209402DA416D4 /* RomandieWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		39BFF9B585D415680B5F701F /* ConcertLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC385F81D6C3FE75AB3FB60 /* ConcertLoader.swift */; };
 		4E16936918780DF93507FBC4 /* RomandieWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25264F6F489D395ECC5E169D /* RomandieWidget.swift */; };
@@ -16,6 +17,7 @@
 		7E25BA40BE0A97E3A9D5E112 /* ConcertLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC385F81D6C3FE75AB3FB60 /* ConcertLoader.swift */; };
 		9666456F75B886D9BB5E8742 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C4AB3F63B503CC51E4D59 /* Theme.swift */; };
 		9CDD1651C14BCCC86B055DD9 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C4AB3F63B503CC51E4D59 /* Theme.swift */; };
+		B122A8C6F6EBBB6DE3B722AF /* ConcertCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15CAD650BD673F983FA7A71 /* ConcertCache.swift */; };
 		BF224FC4BAE6EBE3D88C528A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2281B65BC7FBBBD28272CA5 /* Assets.xcassets */; };
 		D28CA009ACF23F445C1D2F2E /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211ABB17ED02CEE0689ABC58 /* CalendarService.swift */; };
 		DF15380B842564AE6672D2E1 /* ConcertDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20EC65606B75EA4518CF1A /* ConcertDetailView.swift */; };
@@ -51,9 +53,11 @@
 		211ABB17ED02CEE0689ABC58 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
 		25264F6F489D395ECC5E169D /* RomandieWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomandieWidget.swift; sourceTree = "<group>"; };
 		3EE8EC0EC9CA12683D842F9A /* RomandieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RomandieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		44E31110087B34E66C404B4F /* ShiftConcertsIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftConcertsIntent.swift; sourceTree = "<group>"; };
 		6D8C4AB3F63B503CC51E4D59 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		A603B15F7E01678B93A7D3EA /* RomandieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomandieApp.swift; sourceTree = "<group>"; };
 		ABF1EFD3ECA042791A757A08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C15CAD650BD673F983FA7A71 /* ConcertCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertCache.swift; sourceTree = "<group>"; };
 		DAC385F81D6C3FE75AB3FB60 /* ConcertLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertLoader.swift; sourceTree = "<group>"; };
 		E2281B65BC7FBBBD28272CA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E28608C991F209402DA416D4 /* RomandieWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RomandieWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,8 +67,10 @@
 		5752C489CA7CE89527A3C772 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
+				C15CAD650BD673F983FA7A71 /* ConcertCache.swift */,
 				ABF1EFD3ECA042791A757A08 /* Info.plist */,
 				25264F6F489D395ECC5E169D /* RomandieWidget.swift */,
+				44E31110087B34E66C404B4F /* ShiftConcertsIntent.swift */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -203,8 +209,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				58451BCB85090FCADCFAE1CE /* Concert.swift in Sources */,
+				B122A8C6F6EBBB6DE3B722AF /* ConcertCache.swift in Sources */,
 				39BFF9B585D415680B5F701F /* ConcertLoader.swift in Sources */,
 				4E16936918780DF93507FBC4 /* RomandieWidget.swift in Sources */,
+				28B92A41C6C4109802D904E6 /* ShiftConcertsIntent.swift in Sources */,
 				9666456F75B886D9BB5E8742 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
