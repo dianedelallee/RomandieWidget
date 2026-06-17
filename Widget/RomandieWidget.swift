@@ -99,8 +99,10 @@ struct PagerButtons: View {
     let offset: Int
     let pageSize: Int
     let total: Int
-    var tint: Color = .romandieRed
-    var bgOpacity: Double = 0.15
+    // Ronds pleins, bien contrastés.
+    var fill: Color = .romandieRed          // couleur du rond actif
+    var symbol: Color = .white              // couleur du chevron
+    var disabledFill: Color = Color.gray.opacity(0.35)
 
     private var canPrev: Bool { offset > 0 }
     private var canNext: Bool { offset + pageSize < total }
@@ -117,9 +119,9 @@ struct PagerButtons: View {
         Button(intent: ShiftConcertsIntent(direction: direction, pageSize: pageSize)) {
             Image(systemName: name)
                 .font(.caption.bold())
-                .frame(width: 24, height: 24)
-                .background(Circle().fill(tint.opacity(enabled ? bgOpacity : bgOpacity * 0.3)))
-                .foregroundStyle(enabled ? tint : tint.opacity(0.35))
+                .foregroundStyle(symbol)
+                .frame(width: 26, height: 26)
+                .background(Circle().fill(enabled ? fill : disabledFill))
         }
         .buttonStyle(.plain)
         .disabled(!enabled)
@@ -168,7 +170,8 @@ struct SmallView: View {
                         }
                         Spacer()
                         PagerButtons(offset: entry.offset, pageSize: 1, total: entry.concerts.count,
-                                     tint: .white, bgOpacity: 0.3)
+                                     fill: .white, symbol: .romandieRed,
+                                     disabledFill: .white.opacity(0.4))
                     }
                 }
                 .padding(10)
@@ -183,39 +186,44 @@ struct SmallView: View {
 
 struct ListView: View {
     let entry: ConcertEntry
-    let pageSize: Int
-
-    private var visible: [Concert] {
-        guard !entry.concerts.isEmpty else { return [] }
-        let start = min(entry.offset, max(0, entry.concerts.count - 1))
-        let end = min(start + pageSize, entry.concerts.count)
-        return Array(entry.concerts[start..<end])
-    }
+    let pageSize: Int   // nombre max de concerts par page (plafond)
 
     var body: some View {
         if entry.concerts.isEmpty {
             EmptyStateView(message: entry.errorMessage)
         } else {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(spacing: 6) {
-                    Circle().fill(Color.romandieRed).frame(width: 7, height: 7)
-                    Text("\(entry.offset + 1)–\(min(entry.offset + pageSize, entry.concerts.count))/\(entry.concerts.count)")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
-                    Spacer(minLength: 4)
-                    PagerButtons(offset: entry.offset, pageSize: pageSize, total: entry.concerts.count)
-                }
-                ForEach(visible) { c in
-                    Link(destination: DeepLink.url(for: c)) {
-                        ConcertRow(concert: c, poster: entry.image(for: c))
+            GeometryReader { geo in
+                // Combien de lignes tiennent vraiment dans ce widget (toutes tailles d'iPhone).
+                let headerH: CGFloat = 24
+                let rowH: CGFloat = 46          // estimation généreuse -> jamais de débordement
+                let fit = max(1, Int((geo.size.height - headerH) / rowH))
+                let count = min(pageSize, fit, entry.concerts.count)
+
+                let start = min(entry.offset, max(0, entry.concerts.count - 1))
+                let end = min(start + count, entry.concerts.count)
+                let visible = Array(entry.concerts[start..<end])
+
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(spacing: 6) {
+                        Circle().fill(Color.romandieRed).frame(width: 7, height: 7)
+                        Text("\(start + 1)–\(end)/\(entry.concerts.count)")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                        Spacer(minLength: 4)
+                        PagerButtons(offset: start, pageSize: count, total: entry.concerts.count)
                     }
-                    if c.id != visible.last?.id { Divider() }
+                    ForEach(visible) { c in
+                        Link(destination: DeepLink.url(for: c)) {
+                            ConcertRow(concert: c, poster: entry.image(for: c))
+                        }
+                        if c.id != visible.last?.id { Divider() }
+                    }
+                    Spacer(minLength: 0)
                 }
-                Spacer(minLength: 0)
             }
-            .padding(12)
+            .padding(10)
         }
     }
 }
@@ -240,7 +248,7 @@ struct ConcertRow: View {
                     }
                 }
             }
-            .frame(width: 42, height: 42)
+            .frame(width: 40, height: 40)
             .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
 
             VStack(alignment: .leading, spacing: 1) {
