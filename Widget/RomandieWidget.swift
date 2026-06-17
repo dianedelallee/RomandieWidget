@@ -155,7 +155,7 @@ struct SmallView: View {
                         .lineLimit(2)
                         .minimumScaleFactor(0.8)
                     HStack {
-                        Link(destination: c.url) {
+                        Link(destination: DeepLink.url(for: c)) {
                             Text("Infos").font(.caption2.bold())
                                 .foregroundStyle(.white)
                         }
@@ -202,7 +202,7 @@ struct ListView: View {
                     PagerButtons(offset: entry.offset, pageSize: pageSize, total: entry.concerts.count)
                 }
                 ForEach(visible) { c in
-                    Link(destination: c.url) {
+                    Link(destination: DeepLink.url(for: c)) {
                         ConcertRow(concert: c, poster: entry.image(for: c))
                     }
                     if c.id != visible.last?.id { Divider() }

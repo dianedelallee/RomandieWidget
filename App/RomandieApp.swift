@@ -14,9 +14,11 @@ struct ContentView: View {
     @State private var concerts: [Concert] = []
     @State private var loading = true
     @State private var error: String?
+    @State private var path: [Concert] = []
+    @State private var pendingEventId: String?
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             Group {
                 if loading {
                     ProgressView("Chargement…")
@@ -64,6 +66,10 @@ struct ContentView: View {
             }
         }
         .task { await load() }
+        .onOpenURL { url in
+            guard let id = DeepLink.eventId(from: url) else { return }
+            navigate(toEventId: id)
+        }
     }
 
     private func load() async {
@@ -71,10 +77,25 @@ struct ContentView: View {
         do {
             concerts = try await ConcertLoader.fetch()
             WidgetCenter.shared.reloadAllTimelines()
+            // Si un deep link attendait que les données chargent.
+            if let id = pendingEventId {
+                pendingEventId = nil
+                navigate(toEventId: id)
+            }
         } catch {
             self.error = "Impossible de charger la programmation du Romandie."
         }
         loading = false
+    }
+
+    /// Ouvre la fiche du concert correspondant, ou mémorise la demande si les
+    /// concerts ne sont pas encore chargés.
+    private func navigate(toEventId id: String) {
+        if let concert = concerts.first(where: { $0.id == id }) {
+            path = [concert]
+        } else {
+            pendingEventId = id
+        }
     }
 
     private func dayNumber(_ c: Concert) -> String {
