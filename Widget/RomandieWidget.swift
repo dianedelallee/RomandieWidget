@@ -6,19 +6,23 @@ import SwiftUI
 struct ConcertEntry: TimelineEntry {
     let date: Date
     let concerts: [Concert]
-    let posterData: Data?   // visuel du prochain concert (pour le petit widget)
+    let images: [String: Data]   // concert.id -> données de l'affiche
     let errorMessage: String?
+
+    func image(for concert: Concert) -> UIImage? {
+        images[concert.id].flatMap(UIImage.init(data:))
+    }
 }
 
 struct Provider: TimelineProvider {
 
     func placeholder(in context: Context) -> ConcertEntry {
-        ConcertEntry(date: Date(), concerts: ConcertLoader.sample, posterData: nil, errorMessage: nil)
+        ConcertEntry(date: Date(), concerts: ConcertLoader.sample, images: [:], errorMessage: nil)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (ConcertEntry) -> Void) {
         if context.isPreview {
-            completion(ConcertEntry(date: Date(), concerts: ConcertLoader.sample, posterData: nil, errorMessage: nil))
+            completion(ConcertEntry(date: Date(), concerts: ConcertLoader.sample, images: [:], errorMessage: nil))
             return
         }
         Task { completion(await loadEntry()) }
@@ -36,13 +40,21 @@ struct Provider: TimelineProvider {
     private func loadEntry() async -> ConcertEntry {
         do {
             let concerts = try await ConcertLoader.fetch()
-            var poster: Data?
-            if let first = concerts.first, let img = first.imageURL {
-                poster = await ConcertLoader.fetchImageData(img)
+            // Télécharge les affiches des concerts affichés (au max les 7 du grand widget).
+            let toShow = Array(concerts.prefix(7))
+            var images: [String: Data] = [:]
+            await withTaskGroup(of: (String, Data?).self) { group in
+                for c in toShow {
+                    guard let url = c.imageURL else { continue }
+                    group.addTask { (c.id, await ConcertLoader.fetchImageData(url)) }
+                }
+                for await (id, data) in group {
+                    if let data { images[id] = data }
+                }
             }
-            return ConcertEntry(date: Date(), concerts: concerts, posterData: poster, errorMessage: nil)
+            return ConcertEntry(date: Date(), concerts: concerts, images: images, errorMessage: nil)
         } catch {
-            return ConcertEntry(date: Date(), concerts: [], posterData: nil,
+            return ConcertEntry(date: Date(), concerts: [], images: [:],
                                 errorMessage: "Impossible de charger la programmation.")
         }
     }
@@ -74,7 +86,7 @@ struct SmallView: View {
     var body: some View {
         if let c = entry.concerts.first {
             ZStack(alignment: .bottomLeading) {
-                if let data = entry.posterData, let ui = UIImage(data: data) {
+                if let ui = entry.image(for: c) {
                     Image(uiImage: ui)
                         .resizable()
                         .scaledToFill()
@@ -122,7 +134,7 @@ struct ListView: View {
                     Spacer()
                 }
                 ForEach(entry.concerts.prefix(maxRows)) { c in
-                    ConcertRow(concert: c)
+                    ConcertRow(concert: c, poster: entry.image(for: c))
                     if c.id != entry.concerts.prefix(maxRows).last?.id {
                         Divider()
                     }
@@ -137,23 +149,38 @@ struct ListView: View {
 
 struct ConcertRow: View {
     let concert: Concert
+    let poster: UIImage?
 
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
-            VStack(alignment: .center, spacing: 0) {
-                Text(dayNumber).font(.headline).bold()
-                Text(monthShort.uppercased()).font(.caption2)
+            // Affiche (ou pastille date en repli)
+            Group {
+                if let poster {
+                    Image(uiImage: poster)
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    ZStack {
+                        Color.romandieRed
+                        VStack(spacing: 0) {
+                            Text(dayNumber).font(.headline).bold()
+                            Text(monthShort.uppercased()).font(.caption2)
+                        }
+                        .foregroundStyle(.white)
+                    }
+                }
             }
-            .frame(width: 34)
-            .foregroundStyle(Color.romandieRed)
+            .frame(width: 42, height: 42)
+            .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
 
             VStack(alignment: .leading, spacing: 1) {
                 Text(concert.title)
                     .font(.caption).bold()
                     .lineLimit(2)
-                Text(concert.timeText)
+                Text("\(concert.shortDateLabel) · \(concert.timeText)")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
+                    .lineLimit(1)
             }
             Spacer(minLength: 0)
         }
@@ -212,5 +239,5 @@ struct RomandieWidgetBundle: WidgetBundle {
 #Preview("Medium", as: .systemMedium) {
     RomandieWidget()
 } timeline: {
-    ConcertEntry(date: .now, concerts: ConcertLoader.sample, posterData: nil, errorMessage: nil)
+    ConcertEntry(date: .now, concerts: ConcertLoader.sample, images: [:], errorMessage: nil)
 }
