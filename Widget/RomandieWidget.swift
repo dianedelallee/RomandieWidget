@@ -99,23 +99,30 @@ struct PagerButtons: View {
     let offset: Int
     let pageSize: Int
     let total: Int
+    var tint: Color = .romandieRed
+    var bgOpacity: Double = 0.15
 
     private var canPrev: Bool { offset > 0 }
     private var canNext: Bool { offset + pageSize < total }
 
     var body: some View {
-        HStack(spacing: 6) {
-            Button(intent: ShiftConcertsIntent(direction: -1, pageSize: pageSize)) {
-                Image(systemName: "chevron.left").font(.caption2.bold())
-            }
-            .disabled(!canPrev)
-            Button(intent: ShiftConcertsIntent(direction: 1, pageSize: pageSize)) {
-                Image(systemName: "chevron.right").font(.caption2.bold())
-            }
-            .disabled(!canNext)
+        HStack(spacing: 8) {
+            chevron("chevron.left", enabled: canPrev, direction: -1)
+            chevron("chevron.right", enabled: canNext, direction: 1)
+        }
+        .layoutPriority(1)
+    }
+
+    private func chevron(_ name: String, enabled: Bool, direction: Int) -> some View {
+        Button(intent: ShiftConcertsIntent(direction: direction, pageSize: pageSize)) {
+            Image(systemName: name)
+                .font(.caption.bold())
+                .frame(width: 24, height: 24)
+                .background(Circle().fill(tint.opacity(enabled ? bgOpacity : bgOpacity * 0.3)))
+                .foregroundStyle(enabled ? tint : tint.opacity(0.35))
         }
         .buttonStyle(.plain)
-        .foregroundStyle(Color.romandieRed)
+        .disabled(!enabled)
     }
 }
 
@@ -160,8 +167,8 @@ struct SmallView: View {
                                 .foregroundStyle(.white)
                         }
                         Spacer()
-                        PagerButtons(offset: entry.offset, pageSize: 1, total: entry.concerts.count)
-                            .foregroundStyle(.white)
+                        PagerButtons(offset: entry.offset, pageSize: 1, total: entry.concerts.count,
+                                     tint: .white, bgOpacity: 0.3)
                     }
                 }
                 .padding(10)
@@ -191,14 +198,13 @@ struct ListView: View {
         } else {
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 6) {
-                    Circle().fill(Color.romandieRed).frame(width: 8, height: 8)
-                    Text("LE ROMANDIE")
-                        .font(.caption2).bold()
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                    Text("\(entry.offset + 1)–\(min(entry.offset + pageSize, entry.concerts.count)) / \(entry.concerts.count)")
+                    Circle().fill(Color.romandieRed).frame(width: 7, height: 7)
+                    Text("\(entry.offset + 1)–\(min(entry.offset + pageSize, entry.concerts.count))/\(entry.concerts.count)")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                    Spacer(minLength: 4)
                     PagerButtons(offset: entry.offset, pageSize: pageSize, total: entry.concerts.count)
                 }
                 ForEach(visible) { c in
