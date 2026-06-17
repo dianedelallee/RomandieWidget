@@ -3,12 +3,17 @@
 Un widget iOS (WidgetKit) qui affiche les prochains concerts au **Romandie** (Lausanne),
 récupérés en direct depuis [leromandie.ch/programmation](https://www.leromandie.ch/programmation).
 
+> ⚠️ **Application non-officielle.** Les données et les affiches proviennent de
+> leromandie.ch ; ce projet n'est pas affilié au Romandie.
+
+**Widget** (avec affiche + prix) :
 - **Petit** : le prochain concert avec son affiche.
 - **Moyen** : les 3 prochains concerts.
 - **Grand** : les 7 prochains concerts.
 
-Un tap ouvre la page de l'événement (petit widget) ou la programmation (moyen/grand).
-L'app hôte affiche aussi la liste complète et force le rafraîchissement du widget.
+**App hôte** : liste complète + page détail par concert avec
+**billetterie** (Petzi), **ajout au calendrier** (rappel 2 h avant) et lien vers
+la page de l'événement. Un tap sur le widget ouvre l'événement / la programmation.
 
 ## Prérequis
 

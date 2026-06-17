@@ -177,13 +177,19 @@ struct ConcertRow: View {
                 Text(concert.title)
                     .font(.caption).bold()
                     .lineLimit(2)
-                Text("\(concert.shortDateLabel) · \(concert.timeText)")
+                Text(subtitle)
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
             }
             Spacer(minLength: 0)
         }
+    }
+
+    private var subtitle: String {
+        var parts = [concert.shortDateLabel, concert.timeText]
+        if !concert.priceText.isEmpty { parts.append(concert.priceText.capitalized) }
+        return parts.joined(separator: " · ")
     }
 
     private var dayNumber: String {

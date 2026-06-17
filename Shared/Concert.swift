@@ -7,8 +7,23 @@ struct Concert: Identifiable, Hashable {
     let dateText: String    // Date brute affichée, ex. "21 juin 2026"
     let timeText: String    // Heure brute affichée, ex. "17H30"
     let url: URL            // Lien vers la page de l'événement
+    let ticketURL: URL?     // Lien billetterie (Petzi le plus souvent)
+    let priceText: String   // Prix affiché, ex. "25 CHF" ou "GRATUIT"
     let imageURL: URL?      // Visuel de l'événement
-    let date: Date?         // Date analysée (pour filtrer/trier)
+    let date: Date?         // Date analysée (jour, pour filtrer/trier)
+
+    /// Date + heure analysées (pour l'ajout au calendrier). nil si la date est inconnue.
+    var startDate: Date? {
+        guard let date else { return nil }
+        guard let m = timeText.range(of: "\\d{1,2}", options: .regularExpression) else { return date }
+        let hour = Int(timeText[m]) ?? 20
+        var minute = 0
+        if let mm = timeText.range(of: "(?<=[Hh:])\\d{2}", options: .regularExpression) {
+            minute = Int(timeText[mm]) ?? 0
+        }
+        return Calendar(identifier: .gregorian)
+            .date(bySettingHour: hour, minute: minute, second: 0, of: date) ?? date
+    }
 }
 
 enum RomandieParser {
@@ -36,13 +51,19 @@ enum RomandieParser {
             let title = clean(rawTitle)
             if title.isEmpty { continue }
 
-            // Premier lien <a href="...event..."> de l'article
-            let href = firstMatch(in: articleHTML,
-                                  pattern: "<a[^>]*href=\"([^\"]*event[^\"]*)\"",
-                                  group: 1) ?? firstMatch(in: articleHTML,
-                                                          pattern: "<a[^>]*href=\"([^\"]+)\"",
-                                                          group: 1)
-            guard let href, let url = URL(string: clean(href)) else { continue }
+            // Liens de l'article : (image -> event), ("+ d'infos" -> event), (prix -> billetterie)
+            let anchors = anchorPairs(in: articleHTML)
+
+            // Lien vers la page de l'événement.
+            let eventHref = anchors.first(where: { $0.href.contains("/event/") })?.href
+                ?? anchors.first?.href
+            guard let eventHref, let url = URL(string: clean(eventHref)) else { continue }
+
+            // Le dernier lien est le bouton « prix » : son texte = le prix, sa cible = la billetterie.
+            let priceAnchor = anchors.last(where: { !$0.text.isEmpty && $0.href != eventHref })
+                ?? anchors.last(where: { !$0.text.isEmpty })
+            let priceText = priceAnchor?.text ?? ""
+            let ticketURL = priceAnchor.flatMap { URL(string: clean($0.href)) }
 
             // Image
             let imgSrc = firstMatch(in: articleHTML,
@@ -57,6 +78,8 @@ enum RomandieParser {
                                     dateText: dateText,
                                     timeText: timeText,
                                     url: url,
+                                    ticketURL: ticketURL,
+                                    priceText: priceText,
                                     imageURL: imageURL,
                                     date: date))
         }
@@ -130,6 +153,19 @@ enum RomandieParser {
 
     private static func firstMatch(in text: String, pattern: String, group: Int) -> String? {
         matches(in: text, pattern: pattern, group: group).first
+    }
+
+    /// Extrait les liens <a href="...">texte</a> sous forme de paires (href, texte nettoyé).
+    private static func anchorPairs(in html: String) -> [(href: String, text: String)] {
+        guard let re = try? NSRegularExpression(
+            pattern: "<a[^>]*href=\"([^\"]+)\"[^>]*>([\\s\\S]*?)</a>",
+            options: [.caseInsensitive]) else { return [] }
+        let range = NSRange(html.startIndex..., in: html)
+        return re.matches(in: html, range: range).compactMap { m in
+            guard let hr = Range(m.range(at: 1), in: html),
+                  let tr = Range(m.range(at: 2), in: html) else { return nil }
+            return (String(html[hr]), clean(String(html[tr])))
+        }
     }
 
     /// Enlève les balises HTML, décode les entités courantes, normalise les espaces.

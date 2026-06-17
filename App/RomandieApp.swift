@@ -23,24 +23,35 @@ struct ContentView: View {
                 } else if let error {
                     ContentUnavailableView("Oups", systemImage: "wifi.slash", description: Text(error))
                 } else {
-                    List(concerts) { c in
-                        Link(destination: c.url) {
-                            HStack(spacing: 12) {
-                                VStack {
-                                    Text(dayNumber(c)).font(.title3).bold()
-                                    Text(monthShort(c).uppercased()).font(.caption2)
+                    List {
+                        ForEach(concerts) { c in
+                            NavigationLink(value: c) {
+                                HStack(spacing: 12) {
+                                    VStack {
+                                        Text(dayNumber(c)).font(.title3).bold()
+                                        Text(monthShort(c).uppercased()).font(.caption2)
+                                    }
+                                    .frame(width: 42)
+                                    .foregroundStyle(Color.romandieRed)
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(c.title).font(.subheadline).bold()
+                                        Text("\(c.timeText)\(c.priceText.isEmpty ? "" : " · \(c.priceText)")")
+                                            .font(.caption).foregroundStyle(.secondary)
+                                    }
                                 }
-                                .frame(width: 42)
-                                .foregroundStyle(Color.romandieRed)
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(c.title).font(.subheadline).bold()
-                                    Text(c.timeText).font(.caption).foregroundStyle(.secondary)
-                                }
+                                .padding(.vertical, 2)
                             }
-                            .padding(.vertical, 2)
+                        }
+                        Section {
+                            Text("App non-officielle. Données et affiches : leromandie.ch")
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
                         }
                     }
                     .listStyle(.plain)
+                    .navigationDestination(for: Concert.self) { c in
+                        ConcertDetailView(concert: c)
+                    }
                 }
             }
             .navigationTitle("Le Romandie")

@@ -16,6 +16,8 @@
 		7E25BA40BE0A97E3A9D5E112 /* ConcertLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC385F81D6C3FE75AB3FB60 /* ConcertLoader.swift */; };
 		9666456F75B886D9BB5E8742 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C4AB3F63B503CC51E4D59 /* Theme.swift */; };
 		9CDD1651C14BCCC86B055DD9 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C4AB3F63B503CC51E4D59 /* Theme.swift */; };
+		D28CA009ACF23F445C1D2F2E /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211ABB17ED02CEE0689ABC58 /* CalendarService.swift */; };
+		DF15380B842564AE6672D2E1 /* ConcertDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20EC65606B75EA4518CF1A /* ConcertDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +45,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D20EC65606B75EA4518CF1A /* ConcertDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertDetailView.swift; sourceTree = "<group>"; };
 		0F432343463CA7907F701A0D /* Concert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concert.swift; sourceTree = "<group>"; };
+		211ABB17ED02CEE0689ABC58 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
 		25264F6F489D395ECC5E169D /* RomandieWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomandieWidget.swift; sourceTree = "<group>"; };
 		3EE8EC0EC9CA12683D842F9A /* RomandieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RomandieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D8C4AB3F63B503CC51E4D59 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 		CAE82E237E0E1C5A477E951A /* App */ = {
 			isa = PBXGroup;
 			children = (
+				211ABB17ED02CEE0689ABC58 /* CalendarService.swift */,
+				0D20EC65606B75EA4518CF1A /* ConcertDetailView.swift */,
 				A603B15F7E01678B93A7D3EA /* RomandieApp.swift */,
 			);
 			path = App;
@@ -192,7 +198,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D28CA009ACF23F445C1D2F2E /* CalendarService.swift in Sources */,
 				60AF559AADBEC0E20451221D /* Concert.swift in Sources */,
+				DF15380B842564AE6672D2E1 /* ConcertDetailView.swift in Sources */,
 				7E25BA40BE0A97E3A9D5E112 /* ConcertLoader.swift in Sources */,
 				5CFE905760626B87814FAC28 /* RomandieApp.swift in Sources */,
 				9CDD1651C14BCCC86B055DD9 /* Theme.swift in Sources */,
@@ -252,6 +260,7 @@
 				DEVELOPMENT_TEAM = 6YUTPFX8RX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Romandie;
+				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "Pour ajouter un concert du Romandie à ton calendrier.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -400,6 +409,7 @@
 				DEVELOPMENT_TEAM = 6YUTPFX8RX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Romandie;
+				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "Pour ajouter un concert du Romandie à ton calendrier.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
