@@ -164,10 +164,9 @@ struct SmallView: View {
                         .lineLimit(2)
                         .minimumScaleFactor(0.8)
                     HStack {
-                        Link(destination: DeepLink.url(for: c)) {
-                            Text("Infos").font(.caption2.bold())
-                                .foregroundStyle(.white)
-                        }
+                        Text("Détails ›")
+                            .font(.caption2.bold())
+                            .foregroundStyle(.white.opacity(0.9))
                         Spacer()
                         PagerButtons(offset: entry.offset, pageSize: 1, total: entry.concerts.count,
                                      fill: .white, symbol: .romandieRed,
@@ -176,6 +175,9 @@ struct SmallView: View {
                 }
                 .padding(10)
             }
+            // Tout le petit widget (hors flèches) ouvre la fiche : les petits widgets
+            // ne supportent qu'une seule zone tappable, via widgetURL (pas de Link).
+            .widgetURL(DeepLink.url(for: c))
         } else {
             EmptyStateView(message: entry.errorMessage)
         }
