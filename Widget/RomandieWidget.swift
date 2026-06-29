@@ -140,7 +140,7 @@ struct SmallView: View {
 
     var body: some View {
         if let c = concert {
-            ZStack(alignment: .bottomLeading) {
+            ZStack(alignment: .leading) {
                 if let ui = entry.image(for: c) {
                     Image(uiImage: ui).resizable().scaledToFill()
                     LinearGradient(colors: [.black.opacity(0.05), .black.opacity(0.85)],

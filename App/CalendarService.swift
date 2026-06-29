@@ -32,7 +32,7 @@ enum CalendarService {
         event.title = concert.title
         event.startDate = start
         event.endDate = start.addingTimeInterval(3 * 3600) // ~3 h
-        event.location = "Le Romandie, Place de l'Europe 1bis, 1003 Lausanne"
+        event.location = "Le Romandie, Place de l'Europe 1 A, 1003 Lausanne"
         event.url = concert.url
         event.notes = "Concert au Romandie\(concert.priceText.isEmpty ? "" : " · \(concert.priceText)")"
         event.calendar = calendar
