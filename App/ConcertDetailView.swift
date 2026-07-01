@@ -175,9 +175,12 @@ struct ConcertDetailView: View {
     }
 
     private func openGoogleMaps() {
-        // Lien universel : ouvre l'app Google Maps si installée, sinon le navigateur.
-        if let url = URL(string: "https://www.google.com/maps/dir/?api=1&destination=\(venue.latitude),\(venue.longitude)") {
-            openURL(url)
+        let coord = "\(venue.latitude),\(venue.longitude)"
+        // Schéma de l'app Google Maps (destination bien passée) ; repli navigateur si absente.
+        let appURL = URL(string: "comgooglemaps://?daddr=\(coord)")!
+        let webURL = URL(string: "https://www.google.com/maps/dir/?api=1&destination=\(coord)")!
+        openURL(appURL) { accepted in
+            if !accepted { openURL(webURL) }
         }
     }
 
