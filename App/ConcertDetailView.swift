@@ -13,7 +13,7 @@ struct ConcertDetailView: View {
 
     // Coordonnées du Romandie (Place de l'Europe, Lausanne).
     private let venue = CLLocationCoordinate2D(latitude: 46.52033, longitude: 6.63028)
-    private let venueAddress = "Le Romandie, Place de l'Europe 1, 1003 Lausanne"
+    private let venueAddress = "Le Romandie, Pl. de l'Europe 1A, 1003 Lausanne"
 
     private var isFavorite: Bool { favorites.isFavorite(concert) }
 
@@ -168,17 +168,21 @@ struct ConcertDetailView: View {
         }
     }
 
+    /// Adresse encodée pour les URLs d'itinéraire.
+    private var encodedAddress: String {
+        venueAddress.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? venueAddress
+    }
+
     private func openAppleMaps() {
-        let item = MKMapItem(placemark: MKPlacemark(coordinate: venue))
-        item.name = "Le Romandie"
-        item.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDefault])
+        if let url = URL(string: "http://maps.apple.com/?daddr=\(encodedAddress)") {
+            openURL(url)
+        }
     }
 
     private func openGoogleMaps() {
-        let coord = "\(venue.latitude),\(venue.longitude)"
-        // Schéma de l'app Google Maps (destination bien passée) ; repli navigateur si absente.
-        let appURL = URL(string: "comgooglemaps://?daddr=\(coord)")!
-        let webURL = URL(string: "https://www.google.com/maps/dir/?api=1&destination=\(coord)")!
+        // Schéma de l'app Google Maps (adresse en destination) ; repli navigateur si absente.
+        let appURL = URL(string: "comgooglemaps://?daddr=\(encodedAddress)")!
+        let webURL = URL(string: "https://www.google.com/maps/dir/?api=1&destination=\(encodedAddress)")!
         openURL(appURL) { accepted in
             if !accepted { openURL(webURL) }
         }
