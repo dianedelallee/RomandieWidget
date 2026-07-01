@@ -9,6 +9,7 @@ struct ConcertDetailView: View {
     @State private var calendarMessage: String?
     @State private var calendarOK = false
     @State private var addingToCalendar = false
+    @State private var showMapChoice = false
 
     // Coordonnées du Romandie (Place de l'Europe, Lausanne).
     private let venue = CLLocationCoordinate2D(latitude: 46.52033, longitude: 6.63028)
@@ -148,12 +149,18 @@ struct ConcertDetailView: View {
             .allowsHitTesting(false)
 
             Button {
-                openItinerary()
+                showMapChoice = true
             } label: {
                 Label("Itinéraire", systemImage: "location.fill")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
+            .confirmationDialog("Ouvrir l'itinéraire dans…",
+                                isPresented: $showMapChoice, titleVisibility: .visible) {
+                Button("Plans (Apple)") { openAppleMaps() }
+                Button("Google Maps") { openGoogleMaps() }
+                Button("Annuler", role: .cancel) {}
+            }
 
             Text(venueAddress)
                 .font(.caption)
@@ -161,11 +168,17 @@ struct ConcertDetailView: View {
         }
     }
 
-    private func openItinerary() {
-        let placemark = MKPlacemark(coordinate: venue)
-        let item = MKMapItem(placemark: placemark)
+    private func openAppleMaps() {
+        let item = MKMapItem(placemark: MKPlacemark(coordinate: venue))
         item.name = "Le Romandie"
         item.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDefault])
+    }
+
+    private func openGoogleMaps() {
+        // Lien universel : ouvre l'app Google Maps si installée, sinon le navigateur.
+        if let url = URL(string: "https://www.google.com/maps/dir/?api=1&destination=\(venue.latitude),\(venue.longitude)") {
+            openURL(url)
+        }
     }
 
     private func addToCalendar() async {
