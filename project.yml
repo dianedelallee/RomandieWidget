@@ -12,7 +12,7 @@ settings:
     SWIFT_VERSION: "5.0"
     CODE_SIGN_STYLE: Automatic
     # Renseigne ton Team ID Apple ici (ou choisis-le dans Xcode > Signing).
-    DEVELOPMENT_TEAM: ""
+    DEVELOPMENT_TEAM: "6YUTPFX8RX"
 
 targets:
   # --- Application hôte (minimale, mais affiche aussi la liste des concerts) ---
