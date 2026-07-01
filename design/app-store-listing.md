@@ -30,13 +30,14 @@ Agenda Le Romandie affiche les prochains concerts de la salle Le Romandie, à La
 
 FONCTIONNALITÉS
 
-• Widget écran d'accueil en trois tailles (petit, moyen, grand)
-• Affiche, date, heure et prix de chaque concert
-• Navigation : feuillette les concerts à venir avec les flèches ◀ ▶, directement depuis le widget
-• Un tap ouvre la fiche du concert dans l'app
-• Billetterie en un geste (lien vers Petzi / la page de l'événement)
+• Widget écran d'accueil en trois tailles, avec flèches ◀ ▶ pour feuilleter les concerts sans ouvrir l'app
+• Favoris : suis un concert et reçois un rappel (notification) avant la date
+• Recherche et filtres (Tous / Favoris / Gratuit)
 • Ajout d'un concert à ton calendrier, avec rappel
-• Liste complète des concerts à venir dans l'app
+• Plan d'accès à la salle et itinéraire
+• Partage d'un concert à tes amis
+• Affiche, date, heure et prix de chaque concert ; billetterie en un geste
+• Un tap sur le widget ouvre directement la fiche du concert
 
 RESPECT DE TA VIE PRIVÉE
 
