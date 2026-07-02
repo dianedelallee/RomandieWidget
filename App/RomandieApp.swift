@@ -1,13 +1,44 @@
 import SwiftUI
-import WidgetKit
 
 @main
 struct RomandieApp: App {
     @StateObject private var favorites = FavoritesStore()
+    @StateObject private var model = ConcertsModel()
+    @State private var selectedTab = 0
+    @State private var agendaPath: [Concert] = []
+    @State private var pendingEventId: String?
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(favorites)
+            TabView(selection: $selectedTab) {
+                AgendaTab(path: $agendaPath)
+                    .tabItem { Label("Agenda", systemImage: "list.bullet") }
+                    .tag(0)
+
+                CalendarTab()
+                    .tabItem { Label("Calendrier", systemImage: "calendar") }
+                    .tag(1)
+            }
+            .tint(Color.romandieRed)
+            .environmentObject(favorites)
+            .environmentObject(model)
+            .task { if model.concerts.isEmpty { await model.load() } }
+            .onOpenURL { url in
+                guard let id = DeepLink.eventId(from: url) else { return }
+                selectedTab = 0
+                resolve(id)
+            }
+            .onChange(of: model.concerts) { _, _ in
+                if let id = pendingEventId { pendingEventId = nil; resolve(id) }
+            }
+        }
+    }
+
+    private func resolve(_ id: String) {
+        if let concert = model.concerts.first(where: { $0.id == id }) {
+            agendaPath = [concert]
+        } else {
+            pendingEventId = id
         }
     }
 }
@@ -19,18 +50,17 @@ enum ConcertFilter: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 }
 
-struct ContentView: View {
+// MARK: - Onglet Agenda (liste)
+
+struct AgendaTab: View {
+    @EnvironmentObject private var model: ConcertsModel
     @EnvironmentObject private var favorites: FavoritesStore
-    @State private var concerts: [Concert] = []
-    @State private var loading = true
-    @State private var error: String?
-    @State private var path: [Concert] = []
-    @State private var pendingEventId: String?
+    @Binding var path: [Concert]
     @State private var query = ""
     @State private var filter: ConcertFilter = .all
 
     private var visibleConcerts: [Concert] {
-        concerts.filter { c in
+        model.concerts.filter { c in
             switch filter {
             case .all: return true
             case .favorites: return favorites.isFavorite(c)
@@ -43,9 +73,9 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $path) {
             Group {
-                if loading {
+                if model.loading {
                     ProgressView("Chargement…")
-                } else if let error {
+                } else if let error = model.error {
                     ContentUnavailableView("Oups", systemImage: "wifi.slash", description: Text(error))
                 } else {
                     VStack(spacing: 0) {
@@ -61,23 +91,16 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Le Romandie")
-            .navigationDestination(for: Concert.self) { c in
-                ConcertDetailView(concert: c)
-            }
+            .navigationDestination(for: Concert.self) { ConcertDetailView(concert: $0) }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button { Task { await load() } } label: {
+                    Button { Task { await model.load() } } label: {
                         Image(systemName: "arrow.clockwise")
                     }
                 }
             }
         }
         .searchable(text: $query, prompt: "Rechercher un concert")
-        .task { await load() }
-        .onOpenURL { url in
-            guard let id = DeepLink.eventId(from: url) else { return }
-            navigate(toEventId: id)
-        }
     }
 
     @ViewBuilder private var list: some View {
@@ -134,29 +157,6 @@ struct ContentView: View {
         .padding(.vertical, 2)
     }
 
-    private func load() async {
-        loading = true; error = nil
-        do {
-            concerts = try await ConcertLoader.fetch()
-            WidgetCenter.shared.reloadAllTimelines()
-            if let id = pendingEventId {
-                pendingEventId = nil
-                navigate(toEventId: id)
-            }
-        } catch {
-            self.error = "Impossible de charger la programmation du Romandie."
-        }
-        loading = false
-    }
-
-    private func navigate(toEventId id: String) {
-        if let concert = concerts.first(where: { $0.id == id }) {
-            path = [concert]
-        } else {
-            pendingEventId = id
-        }
-    }
-
     private func dayNumber(_ c: Concert) -> String {
         guard let d = c.date else { return "•" }
         return String(Calendar.current.component(.day, from: d))
@@ -167,5 +167,28 @@ struct ContentView: View {
         f.locale = Locale(identifier: "fr_CH")
         f.setLocalizedDateFormatFromTemplate("MMM")
         return f.string(from: d)
+    }
+}
+
+// MARK: - Onglet Calendrier
+
+struct CalendarTab: View {
+    @EnvironmentObject private var model: ConcertsModel
+    @State private var path: [Concert] = []
+
+    var body: some View {
+        NavigationStack(path: $path) {
+            Group {
+                if model.loading {
+                    ProgressView("Chargement…")
+                } else if let error = model.error {
+                    ContentUnavailableView("Oups", systemImage: "wifi.slash", description: Text(error))
+                } else {
+                    CalendarView(concerts: model.concerts)
+                }
+            }
+            .navigationTitle("Calendrier")
+            .navigationDestination(for: Concert.self) { ConcertDetailView(concert: $0) }
+        }
     }
 }
