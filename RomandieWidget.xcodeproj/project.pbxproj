@@ -16,6 +16,7 @@
 		58451BCB85090FCADCFAE1CE /* Concert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F432343463CA7907F701A0D /* Concert.swift */; };
 		5CFE905760626B87814FAC28 /* RomandieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A603B15F7E01678B93A7D3EA /* RomandieApp.swift */; };
 		60AF559AADBEC0E20451221D /* Concert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F432343463CA7907F701A0D /* Concert.swift */; };
+		6B496D1220CCEBCE944D76E2 /* PDFPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE20CB647F7B09DE9608C00A /* PDFPreview.swift */; };
 		7E25BA40BE0A97E3A9D5E112 /* ConcertLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC385F81D6C3FE75AB3FB60 /* ConcertLoader.swift */; };
 		93883C6699E67B67C297CA15 /* ConcertsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603532367EB068617540EA1 /* ConcertsModel.swift */; };
 		9666456F75B886D9BB5E8742 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C4AB3F63B503CC51E4D59 /* Theme.swift */; };
@@ -23,6 +24,7 @@
 		A01182A80D12C74B937CFD75 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DC8D3C697206C4EAF0AE42 /* DeepLink.swift */; };
 		AFE245452B1AA762879074DD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18766DB4C432DE6851A691EB /* CalendarView.swift */; };
 		B122A8C6F6EBBB6DE3B722AF /* ConcertCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15CAD650BD673F983FA7A71 /* ConcertCache.swift */; };
+		B6434B93AFDA04E38BA31141 /* TicketStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2FC344EAB0381951DFEB0F /* TicketStore.swift */; };
 		B995D7F941952E1748DED235 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C6B67F7689C7B5F19AB36F /* NotificationService.swift */; };
 		BF224FC4BAE6EBE3D88C528A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2281B65BC7FBBBD28272CA5 /* Assets.xcassets */; };
 		D28CA009ACF23F445C1D2F2E /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211ABB17ED02CEE0689ABC58 /* CalendarService.swift */; };
@@ -67,10 +69,12 @@
 		9603532367EB068617540EA1 /* ConcertsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertsModel.swift; sourceTree = "<group>"; };
 		A603B15F7E01678B93A7D3EA /* RomandieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomandieApp.swift; sourceTree = "<group>"; };
 		ABF1EFD3ECA042791A757A08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BE20CB647F7B09DE9608C00A /* PDFPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFPreview.swift; sourceTree = "<group>"; };
 		C15CAD650BD673F983FA7A71 /* ConcertCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertCache.swift; sourceTree = "<group>"; };
 		DAC385F81D6C3FE75AB3FB60 /* ConcertLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertLoader.swift; sourceTree = "<group>"; };
 		E2281B65BC7FBBBD28272CA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E28608C991F209402DA416D4 /* RomandieWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RomandieWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF2FC344EAB0381951DFEB0F /* TicketStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketStore.swift; sourceTree = "<group>"; };
 		F1C6B67F7689C7B5F19AB36F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		F46484C7170C87624266E121 /* FavoritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,7 +122,9 @@
 				F46484C7170C87624266E121 /* FavoritesStore.swift */,
 				8C2DE48EC142C3FE5993C1E0 /* Info.plist */,
 				F1C6B67F7689C7B5F19AB36F /* NotificationService.swift */,
+				BE20CB647F7B09DE9608C00A /* PDFPreview.swift */,
 				A603B15F7E01678B93A7D3EA /* RomandieApp.swift */,
+				EF2FC344EAB0381951DFEB0F /* TicketStore.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -251,8 +257,10 @@
 				4D72A395F90D2803DE600F03 /* DeepLink.swift in Sources */,
 				417E8FFAB79528F19E135B2C /* FavoritesStore.swift in Sources */,
 				B995D7F941952E1748DED235 /* NotificationService.swift in Sources */,
+				6B496D1220CCEBCE944D76E2 /* PDFPreview.swift in Sources */,
 				5CFE905760626B87814FAC28 /* RomandieApp.swift in Sources */,
 				9CDD1651C14BCCC86B055DD9 /* Theme.swift in Sources */,
+				B6434B93AFDA04E38BA31141 /* TicketStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,7 +359,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 6YUTPFX8RX;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -418,7 +426,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 6YUTPFX8RX;
 				ENABLE_NS_ASSERTIONS = NO;

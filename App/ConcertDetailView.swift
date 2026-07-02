@@ -1,15 +1,19 @@
 import SwiftUI
 import MapKit
+import UniformTypeIdentifiers
 
 struct ConcertDetailView: View {
     let concert: Concert
 
     @EnvironmentObject private var favorites: FavoritesStore
+    @EnvironmentObject private var tickets: TicketStore
     @Environment(\.openURL) private var openURL
     @State private var calendarMessage: String?
     @State private var calendarOK = false
     @State private var addingToCalendar = false
     @State private var showMapChoice = false
+    @State private var showTicketImporter = false
+    @State private var showFullTicket = false
 
     // Coordonnées du Romandie (Place de l'Europe, Lausanne).
     private let venue = CLLocationCoordinate2D(latitude: 46.52033, longitude: 6.63028)
@@ -54,6 +58,8 @@ struct ConcertDetailView: View {
 
                 actions
 
+                ticketSection
+
                 if let calendarMessage {
                     Text(calendarMessage)
                         .font(.caption)
@@ -82,6 +88,66 @@ struct ConcertDetailView: View {
                         .foregroundStyle(.pink)
                 }
                 .accessibilityLabel(isFavorite ? "Retirer des favoris" : "Ajouter aux favoris")
+            }
+        }
+        .fileImporter(isPresented: $showTicketImporter, allowedContentTypes: [.pdf]) { result in
+            if case .success(let url) = result {
+                try? tickets.importTicket(from: url, for: concert)
+            }
+        }
+        .sheet(isPresented: $showFullTicket) {
+            if let url = tickets.url(for: concert) {
+                NavigationStack {
+                    PDFPreview(url: url)
+                        .ignoresSafeArea(edges: .bottom)
+                        .navigationTitle("Billet")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .topBarTrailing) { ShareLink(item: url) }
+                        }
+                }
+            }
+        }
+    }
+
+    // MARK: - Billet PDF
+
+    @ViewBuilder private var ticketSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label("Mon billet", systemImage: "qrcode").font(.headline)
+
+            if let url = tickets.url(for: concert) {
+                PDFPreview(url: url)
+                    .frame(height: 240)
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(.quaternary))
+                HStack(spacing: 10) {
+                    Button {
+                        showFullTicket = true
+                    } label: {
+                        Label("Plein écran", systemImage: "arrow.up.left.and.arrow.down.right")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    Button(role: .destructive) {
+                        tickets.delete(for: concert)
+                    } label: {
+                        Label("Supprimer", systemImage: "trash")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                }
+            } else {
+                Button {
+                    showTicketImporter = true
+                } label: {
+                    Label("Ajouter mon billet (PDF)", systemImage: "square.and.arrow.down")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                Text("Importe le PDF reçu par e-mail (Petzi) : ton QR reste accessible hors-ligne, même à l'entrée.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
         }
     }

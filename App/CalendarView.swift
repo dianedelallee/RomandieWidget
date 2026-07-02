@@ -148,6 +148,7 @@ struct CalendarView: View {
 
 private struct ConcertCalendarRow: View {
     let concert: Concert
+    @EnvironmentObject private var tickets: TicketStore
     var body: some View {
         HStack(spacing: 12) {
             RoundedRectangle(cornerRadius: 6)
@@ -159,6 +160,9 @@ private struct ConcertCalendarRow: View {
                     .font(.caption).foregroundStyle(.secondary)
             }
             Spacer(minLength: 0)
+            if tickets.hasTicket(concert) {
+                Image(systemName: "qrcode").font(.caption).foregroundStyle(Color.romandieRed)
+            }
             Image(systemName: "chevron.right").font(.caption).foregroundStyle(.tertiary)
         }
         .padding(.horizontal)

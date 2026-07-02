@@ -3,6 +3,7 @@ import SwiftUI
 @main
 struct RomandieApp: App {
     @StateObject private var favorites = FavoritesStore()
+    @StateObject private var tickets = TicketStore()
     @StateObject private var model = ConcertsModel()
     @State private var selectedTab = 0
     @State private var agendaPath: [Concert] = []
@@ -21,6 +22,7 @@ struct RomandieApp: App {
             }
             .tint(Color.romandieRed)
             .environmentObject(favorites)
+            .environmentObject(tickets)
             .environmentObject(model)
             .task { if model.concerts.isEmpty { await model.load() } }
             .onOpenURL { url in
@@ -55,6 +57,7 @@ enum ConcertFilter: String, CaseIterable, Identifiable {
 struct AgendaTab: View {
     @EnvironmentObject private var model: ConcertsModel
     @EnvironmentObject private var favorites: FavoritesStore
+    @EnvironmentObject private var tickets: TicketStore
     @Binding var path: [Concert]
     @State private var query = ""
     @State private var filter: ConcertFilter = .all
@@ -150,6 +153,9 @@ struct AgendaTab: View {
                     .font(.caption).foregroundStyle(.secondary)
             }
             Spacer(minLength: 0)
+            if tickets.hasTicket(c) {
+                Image(systemName: "qrcode").font(.caption).foregroundStyle(Color.romandieRed)
+            }
             if favorites.isFavorite(c) {
                 Image(systemName: "heart.fill").font(.caption).foregroundStyle(.pink)
             }
