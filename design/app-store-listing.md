@@ -22,37 +22,36 @@ Concerts à venir, non-officiel
 Ne rate plus un concert au Romandie : widget, calendrier, favoris avec rappels, itinéraire, et garde ton billet PDF accessible hors-ligne. App non-officielle.
 ```
 
-## Description  (max 4000 car.)
+## Description  (max 4000 car.) — accents OK, sans emoji ni flèches (cause du refus)
 ```
-Agenda Le Romandie t'aide à suivre les concerts de la salle Le Romandie, à Lausanne, et à ne rien manquer — jusque sur ton écran d'accueil.
+Agenda Le Romandie t'aide à suivre les concerts de la salle Le Romandie, à Lausanne, et à ne rien manquer, jusque sur ton écran d'accueil.
 
-⚠️ Application non-officielle. Les informations et les affiches proviennent du site public leromandie.ch. Cette app n'est pas affiliée au Romandie.
+Application non-officielle. Les informations et les affiches proviennent du site public leromandie.ch. Cette app n'est pas affiliée au Romandie.
 
 DEUX FAÇONS DE PARCOURIR
-
-• Agenda : la liste des prochains concerts, avec recherche et filtres (Tous / Favoris / Gratuit)
-• Calendrier : une vue mensuelle interactive qui repère d'un coup d'œil les jours de concert
+- Agenda : la liste des prochains concerts, avec recherche et filtres (Tous, Favoris, Gratuit)
+- Calendrier : une vue mensuelle interactive qui repère d'un coup d'oeil les jours de concert
 
 TON WIDGET SUR L'ÉCRAN D'ACCUEIL
-
-• Trois tailles (petit, moyen, grand)
-• Flèches ◀ ▶ pour feuilleter les concerts sans ouvrir l'app
-• Un tap ouvre directement la fiche du concert
+- Trois tailles (petit, moyen, grand)
+- Des flèches pour feuilleter les concerts sans ouvrir l'app
+- Un tap ouvre directement la fiche du concert
 
 TES CONCERTS, TES BILLETS
-
-• Favoris : suis un concert et reçois une notification de rappel avant la date
-• Ajoute un concert à ton calendrier, avec alarme
-• Importe ton billet PDF (reçu par e-mail) : ton QR code reste accessible hors-ligne, même à l'entrée
-• Billetterie en un geste, plan d'accès et itinéraire vers la salle
-• Partage un concert à tes amis
+- Favoris : suis un concert et reçois une notification de rappel avant la date
+- Ajoute un concert à ton calendrier, avec alarme
+- Importe ton billet PDF reçu par e-mail : ton QR code reste accessible hors-ligne, même à l'entrée
+- Billetterie en un geste, plan d'accès et itinéraire vers la salle
+- Partage un concert à tes amis
 
 RESPECT DE TA VIE PRIVÉE
-
 Aucune donnée personnelle collectée. Pas de compte, pas de pub, pas de traceur. L'app récupère simplement la programmation publique du Romandie pour l'afficher.
 
-Conçue avec ❤ pour ne rien manquer des concerts au Romandie.
+Conçue pour ne rien manquer des concerts au Romandie.
 ```
+> Le refus « invalid characters » venait des emoji (⚠️ ❤) et des flèches ◀ ▶ — retirés ici.
+> Les accents français (é è à ç ê) sont acceptés. J'ai aussi remplacé la ligature « œil » par
+> « oeil » par précaution.
 
 ## Mots-clés  (max 100 car., séparés par des virgules, sans espaces)
 ```
