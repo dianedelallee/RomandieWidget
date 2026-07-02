@@ -25,7 +25,11 @@ not available through a website. Please test on an iPhone:
 5) CALENDAR VIEW (bottom tab "Calendrier"): a native interactive month calendar that marks
    the days with concerts, lets you tap a day to see that day's concerts, and browse months.
 
-6) SEARCH & FILTERS, native share sheet, and offline access to previously loaded data.
+6) OFFLINE TICKET WALLET: on a concert’s detail, “Ajouter mon billet (PDF)” imports the PDF
+   ticket received by email, stores it on-device, and displays the QR code (PDFKit) — so the
+   ticket is available offline at the venue. A 🎟️ badge then appears on that concert.
+
+7) SEARCH & FILTERS, native share sheet, and offline access to previously loaded data.
 
 The app is organized in two tabs (Agenda list / Calendar), not a single web-like list.
 
@@ -37,24 +41,29 @@ Thank you.
 
 Hello, and thank you for the follow-up.
 
-We’d like to respectfully clarify the native functionality, as the review was performed on
-an iPad Air (M3) where the app’s core feature — a Home Screen Widget — cannot be evaluated
-(iPhone widgets are not available on the iPad Home Screen). The app is built for iPhone.
+Thank you for the continued feedback. This new build (1.0 build 6) substantially expands the
+app’s native functionality, and we’d like to respectfully highlight it — especially as the
+previous review was performed on an iPad Air (M3), where the app’s core feature (a Home
+Screen Widget) cannot be evaluated, since iPhone widgets are not available on the iPad Home
+Screen. The app is designed for iPhone; we kindly ask that it be reviewed on an iPhone.
 
-Beyond displaying concerts, the app provides substantial native functionality that a
-website cannot offer:
+The app is now organized in two tabs (an Agenda list and an interactive Calendar), and offers
+native capabilities that a website cannot provide:
 
 • Home Screen Widgets (WidgetKit) in three sizes, with interactive pagination buttons
   (App Intents) and deep links into the app — testable only on iPhone.
+• An offline ticket wallet: users import their PDF ticket (from the Petzi confirmation email)
+  and the app stores it on-device and shows the QR code (PDFKit), available offline at the
+  venue’s entrance.
 • Favorites with scheduled local notification reminders (UserNotifications).
+• A native interactive Calendar view (month grid) — one of the two tabs.
 • Calendar integration (EventKit) with an alarm.
 • A native venue map with directions (MapKit / Apple Maps / Google Maps).
-• A native interactive Calendar view (month grid) — one of the app's two tabs.
 • Native search, filtering, a share sheet, and offline access to cached data.
 
-We’ve added detailed steps in the App Review Information notes to help evaluate each feature
-on an iPhone. We’d be grateful if the app could be reviewed on an iPhone, where the widget —
-its primary purpose — is available. We’re also happy to provide a short demo video.
+Step-by-step instructions to evaluate each feature on an iPhone are provided in the App
+Review Information notes. We’re also happy to share a short demo video. We believe the app now
+offers an engaging, lasting native experience well beyond a web browsing experience.
 
 Thank you very much for your time.
 
@@ -65,5 +74,5 @@ Thank you very much for your time.
    (Idéalement, joins une **vidéo de démo** : capture d'écran vidéo iPhone montrant le
    widget + favoris + notification. Menu simulateur/iPhone : enregistrement d'écran.)
 2. **Resolution Center** : réponds au message avec le bloc B.
-3. Pas besoin de nouveau build si le binaire 1.0 (5) est toujours associé — sinon ré-associe
-   le build 5 et **Submit for Review**.
+3. Upload le nouveau binaire **1.0 (6)** (calendrier + billet PDF), associe-le à la version,
+   puis **Submit for Review**.
