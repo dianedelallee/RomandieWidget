@@ -30,6 +30,7 @@ Agenda Le Romandie affiche les prochains concerts de la salle Le Romandie, à La
 
 FONCTIONNALITÉS
 
+• Deux vues : liste Agenda et Calendrier mensuel interactif
 • Widget écran d'accueil en trois tailles, avec flèches ◀ ▶ pour feuilleter les concerts sans ouvrir l'app
 • Favoris : suis un concert et reçois un rappel (notification) avant la date
 • Recherche et filtres (Tous / Favoris / Gratuit)

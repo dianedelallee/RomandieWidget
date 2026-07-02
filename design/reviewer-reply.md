@@ -22,7 +22,12 @@ not available through a website. Please test on an iPhone:
 4) MAP + DIRECTIONS (MapKit): the detail screen shows a native map of the venue and an
    “Itinéraire” action that opens Apple Maps or Google Maps with directions.
 
-5) SEARCH & FILTERS, native share sheet, and offline access to previously loaded data.
+5) CALENDAR VIEW (bottom tab "Calendrier"): a native interactive month calendar that marks
+   the days with concerts, lets you tap a day to see that day's concerts, and browse months.
+
+6) SEARCH & FILTERS, native share sheet, and offline access to previously loaded data.
+
+The app is organized in two tabs (Agenda list / Calendar), not a single web-like list.
 
 Thank you.
 
@@ -44,6 +49,7 @@ website cannot offer:
 • Favorites with scheduled local notification reminders (UserNotifications).
 • Calendar integration (EventKit) with an alarm.
 • A native venue map with directions (MapKit / Apple Maps / Google Maps).
+• A native interactive Calendar view (month grid) — one of the app's two tabs.
 • Native search, filtering, a share sheet, and offline access to cached data.
 
 We’ve added detailed steps in the App Review Information notes to help evaluate each feature
