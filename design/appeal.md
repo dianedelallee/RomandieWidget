@@ -45,6 +45,21 @@ Diane Delallee
 
 ---
 
+## Message d'accompagnement de la vidéo (à coller avec la pièce jointe)
+
+Please find attached a short screen recording made on an iPhone. It demonstrates the native
+features that could not be evaluated during the iPad review — in order:
+
+0:00 Home Screen widget with interactive ◀ ▶ paging; tapping a concert deep-links into its
+     detail screen.
+0:15 Favorite a concert → a local reminder notification is scheduled.
+0:22 Import a PDF ticket → the QR code is stored on-device and shown offline (Airplane Mode).
+0:35 Native venue map with directions; interactive month Calendar view.
+
+We kindly ask that the app be re-evaluated on an iPhone. Thank you.
+
+---
+
 ## Script de la vidéo de démo (30–60 s, filmée SUR TON IPHONE)
 
 Active l'**Enregistrement d'écran** (Centre de contrôle), puis :
