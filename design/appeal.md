@@ -47,16 +47,21 @@ Diane Delallee
 
 ## Message d'accompagnement de la vidéo (à coller avec la pièce jointe)
 
-Please find attached a short screen recording made on an iPhone. It demonstrates the native
-features that could not be evaluated during the iPad review — in order:
+Please find attached a short screen recording (approx. 55s) made on an iPhone. It shows the
+native features that could not be evaluated during the iPad review, in order:
 
-0:00 Home Screen widget with interactive ◀ ▶ paging; tapping a concert deep-links into its
-     detail screen.
-0:15 Favorite a concert → a local reminder notification is scheduled.
-0:22 Import a PDF ticket → the QR code is stored on-device and shown offline (Airplane Mode).
-0:35 Native venue map with directions; interactive month Calendar view.
+0:00 — Home Screen widget with interactive ◀ ▶ paging through upcoming concerts; tapping a
+       concert opens its detail directly in the app (deep link).
+0:05 — The concert is in Favorites, which schedules a local reminder notification
+       (UserNotifications).
+0:10 — “Itinéraire” opens native turn-by-turn directions to the venue.
+0:20 — “Mon billet”: a PDF ticket is imported and its QR code is stored on-device (PDFKit).
+0:35 — Interactive month Calendar view; tapping a day shows that day’s concerts.
+0:40 — Airplane Mode is enabled…
+0:50 — …and the stored ticket’s QR code is still shown full-screen, fully offline.
 
-We kindly ask that the app be re-evaluated on an iPhone. Thank you.
+None of this is a web-browsing experience. We kindly ask that the app be re-evaluated on an
+iPhone. Thank you.
 
 ---
 
