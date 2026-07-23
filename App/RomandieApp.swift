@@ -6,13 +6,13 @@ struct RomandieApp: App {
     @StateObject private var tickets = TicketStore()
     @StateObject private var model = ConcertsModel()
     @State private var selectedTab = 0
-    @State private var agendaPath: [Concert] = []
+    @State private var agendaSelection: Concert?
     @State private var pendingEventId: String?
 
     var body: some Scene {
         WindowGroup {
             TabView(selection: $selectedTab) {
-                AgendaTab(path: $agendaPath)
+                AgendaTab(selection: $agendaSelection)
                     .tabItem { Label("Agenda", systemImage: "list.bullet") }
                     .tag(0)
 
@@ -38,7 +38,7 @@ struct RomandieApp: App {
 
     private func resolve(_ id: String) {
         if let concert = model.concerts.first(where: { $0.id == id }) {
-            agendaPath = [concert]
+            agendaSelection = concert
         } else {
             pendingEventId = id
         }
@@ -58,7 +58,7 @@ struct AgendaTab: View {
     @EnvironmentObject private var model: ConcertsModel
     @EnvironmentObject private var favorites: FavoritesStore
     @EnvironmentObject private var tickets: TicketStore
-    @Binding var path: [Concert]
+    @Binding var selection: Concert?
     @State private var query = ""
     @State private var filter: ConcertFilter = .all
 
@@ -74,7 +74,7 @@ struct AgendaTab: View {
     }
 
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationSplitView {
             Group {
                 if model.loading {
                     ProgressView("Chargement…")
@@ -94,13 +94,20 @@ struct AgendaTab: View {
                 }
             }
             .navigationTitle("Le Romandie")
-            .navigationDestination(for: Concert.self) { ConcertDetailView(concert: $0) }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { Task { await model.load() } } label: {
                         Image(systemName: "arrow.clockwise")
                     }
                 }
+            }
+        } detail: {
+            if let selection {
+                ConcertDetailView(concert: selection)
+            } else {
+                ContentUnavailableView("Choisis un concert",
+                                       systemImage: "hand.tap",
+                                       description: Text("Sélectionne un concert dans la liste."))
             }
         }
         .searchable(text: $query, prompt: "Rechercher un concert")
@@ -116,9 +123,10 @@ struct AgendaTab: View {
                                   : "Essaie un autre filtre ou une autre recherche.")
             )
         } else {
-            List {
+            List(selection: $selection) {
                 ForEach(visibleConcerts) { c in
-                    NavigationLink(value: c) { row(c) }
+                    row(c)
+                        .tag(c)
                         .swipeActions(edge: .leading, allowsFullSwipe: true) {
                             Button {
                                 Task { await favorites.toggle(c) }
