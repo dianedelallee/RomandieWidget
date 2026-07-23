@@ -19,7 +19,7 @@ Concerts à venir, non-officiel
 
 ## Texte promotionnel  (max 170 car., modifiable à tout moment sans review)
 ```
-Ne rate plus un concert au Romandie : widget, calendrier, favoris avec rappels, itinéraire, et garde ton billet PDF accessible hors-ligne. App non-officielle.
+Les concerts du Romandie sur iPhone, iPad et Apple Watch : widget, calendrier, favoris avec rappels, billet PDF hors-ligne. App non-officielle.
 ```
 
 ## Description  (max 4000 car.) — accents OK, sans emoji ni flèches (cause du refus)
@@ -43,6 +43,11 @@ TES CONCERTS, TES BILLETS
 - Importe ton billet PDF reçu par e-mail : ton QR code reste accessible hors-ligne, même à l'entrée
 - Billetterie en un geste, plan d'accès et itinéraire vers la salle
 - Partage un concert à tes amis
+
+SUR TOUS TES APPAREILS
+- iPhone et iPad (vue liste + détail côte à côte sur grand écran)
+- Apple Watch : les prochains concerts directement au poignet
+- Widget d'écran d'accueil sur iPhone et iPad
 
 RESPECT DE TA VIE PRIVÉE
 Aucune donnée personnelle collectée. Pas de compte, pas de pub, pas de traceur. L'app récupère simplement la programmation publique du Romandie pour l'afficher.
