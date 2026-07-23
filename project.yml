@@ -3,6 +3,7 @@ options:
   bundleIdPrefix: ch.leromandie
   deploymentTarget:
     iOS: "17.0"
+    watchOS: "10.0"
   createIntermediateGroups: true
 
 settings:
@@ -33,6 +34,23 @@ targets:
         TARGETED_DEVICE_FAMILY: "1,2"
     dependencies:
       - target: RomandieWidgetExtension
+      - target: RomandieWatch
+        embed: true
+
+  # --- App Apple Watch (watchOS) ---
+  RomandieWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - Watch
+      - Shared
+    settings:
+      base:
+        # = bundle id de l'app + ".watchkitapp" (convention companion watchOS).
+        PRODUCT_BUNDLE_IDENTIFIER: ch.diane.romandie.watchkitapp
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: Watch/Info.plist
+        TARGETED_DEVICE_FAMILY: "4"
 
   # --- Extension widget (WidgetKit) ---
   RomandieWidgetExtension:
