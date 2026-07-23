@@ -59,6 +59,7 @@ struct AgendaTab: View {
     @EnvironmentObject private var favorites: FavoritesStore
     @EnvironmentObject private var tickets: TicketStore
     @Binding var selection: Concert?
+    @Environment(\.horizontalSizeClass) private var hSize
     @State private var query = ""
     @State private var filter: ConcertFilter = .all
 
@@ -111,6 +112,16 @@ struct AgendaTab: View {
             }
         }
         .searchable(text: $query, prompt: "Rechercher un concert")
+        .onAppear { autoSelectOnPad() }
+        .onChange(of: model.concerts) { _, _ in autoSelectOnPad() }
+    }
+
+    /// Sur iPad (grand écran), pré-sélectionne un concert pour ne pas laisser
+    /// le panneau détail vide. Sur iPhone, on ne pré-sélectionne pas.
+    private func autoSelectOnPad() {
+        if hSize == .regular, selection == nil {
+            selection = visibleConcerts.first
+        }
     }
 
     @ViewBuilder private var list: some View {
