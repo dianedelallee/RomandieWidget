@@ -35,6 +35,7 @@
 		DA33112EB1091503CC195748 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DC8D3C697206C4EAF0AE42 /* DeepLink.swift */; };
 		DF15380B842564AE6672D2E1 /* ConcertDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20EC65606B75EA4518CF1A /* ConcertDetailView.swift */; };
 		F96A9A796CC7F9C1F4F1800F /* RomandieWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D835662CD0E0370C3A7832 /* RomandieWatchApp.swift */; };
+		FB65715FC67B34783AD3FC63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C80101BAD414742B8314D1E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		2E3F599980D7854D39ECB69D /* RomandieWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RomandieWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE8EC0EC9CA12683D842F9A /* RomandieApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = RomandieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E31110087B34E66C404B4F /* ShiftConcertsIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftConcertsIntent.swift; sourceTree = "<group>"; };
+		4C80101BAD414742B8314D1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68D835662CD0E0370C3A7832 /* RomandieWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomandieWatchApp.swift; sourceTree = "<group>"; };
 		6D8C4AB3F63B503CC51E4D59 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		8C2DE48EC142C3FE5993C1E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		FC17B2C0E7978D3335A70BF0 /* Watch */ = {
 			isa = PBXGroup;
 			children = (
+				4C80101BAD414742B8314D1E /* Assets.xcassets */,
 				93D01ACD15BF6CCA3488FE1C /* Info.plist */,
 				68D835662CD0E0370C3A7832 /* RomandieWatchApp.swift */,
 			);
@@ -202,6 +205,7 @@
 			buildConfigurationList = B41C0344EF0E4B0C95A4B572 /* Build configuration list for PBXNativeTarget "RomandieWatch" */;
 			buildPhases = (
 				CC35730E7BB73EB774E5F57D /* Sources */,
+				EBB8302829ABE00E31F60744 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -286,6 +290,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF224FC4BAE6EBE3D88C528A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBB8302829ABE00E31F60744 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB65715FC67B34783AD3FC63 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

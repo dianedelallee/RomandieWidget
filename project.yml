@@ -48,6 +48,7 @@ targets:
       base:
         # = bundle id de l'app + ".watchkitapp" (convention companion watchOS).
         PRODUCT_BUNDLE_IDENTIFIER: ch.diane.romandie.watchkitapp
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         GENERATE_INFOPLIST_FILE: NO
         INFOPLIST_FILE: Watch/Info.plist
         TARGETED_DEVICE_FAMILY: "4"
