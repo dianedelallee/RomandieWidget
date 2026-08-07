@@ -12,7 +12,7 @@ Idéalement, la lettre est sur **papier à en-tête** de l'association et **dat�
 
 ---
 
-## Modèle de lettre d'autorisation (à adapter et signer)
+## Modèle de lettre d'autorisation (version présidente — à compléter et signer)
 
 ```
 [EN-TÊTE / NOM DE L'ASSOCIATION]
@@ -24,22 +24,21 @@ Objet : Autorisation d'utilisation du nom « Le Romandie » dans l'application �
 
 À l'attention de l'App Review Board d'Apple,
 
-L'association [NOM LÉGAL DE L'ASSOCIATION], qui exploite la salle de concerts
-Le Romandie à Lausanne et est titulaire de son nom et de son identité, autorise
-par la présente Madame Diane Delallee à publier sur l'App Store l'application
-« Agenda Le Romandie », qui affiche la programmation publique de la salle.
+En ma qualité de présidente de l'association [NOM LÉGAL DE L'ASSOCIATION], qui
+exploite la salle de concerts Le Romandie à Lausanne et est titulaire de son nom
+et de son identité visuelle, j'autorise par la présente la publication sur l'App
+Store de l'application « Agenda Le Romandie », qui affiche la programmation
+publique de la salle.
 
-Madame Diane Delallee est [membre du comité / présidente / rôle exact selon les statuts]
-de l'association et est habilitée à cet effet. L'application est éditée à titre
-non commercial et informe le public des concerts à venir.
+L'application est éditée par moi-même, Diane Delallee, présidente de l'association,
+à titre non commercial et à des fins d'information du public. L'association confirme
+son autorisation d'utiliser le nom et les visuels « Le Romandie » dans ce cadre.
 
-Nous confirmons notre relation avec l'éditrice de l'application et l'autorisation
-d'utiliser le nom et les visuels « Le Romandie » dans ce cadre.
-
-[Prénom Nom]
-[Fonction dans l'association]
+Diane Delallee
+Présidente de [NOM LÉGAL DE L'ASSOCIATION]
 [Signature]
 ```
+*(Joindre les statuts signés te désignant présidente comme preuve de ta qualité.)*
 
 ---
 
